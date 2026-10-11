@@ -1,0 +1,15 @@
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+.DS_Store
+
+# Source material kept locally, not part of the app
+*.docx
+WhatsApp Image*.jpeg
+
+# Video build outputs (rebuild with: python video/build.py)
+video/build/
+video/*.mp4
+__pycache__/
