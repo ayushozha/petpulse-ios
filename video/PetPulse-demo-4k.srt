@@ -1,0 +1,63 @@
+1
+00:00:00,500 --> 00:00:04,172
+Meet PetPulse. Know your pet, sooner.
+
+2
+00:00:05,372 --> 00:00:16,028
+Our pets can't tell us when something hurts. They speak through tiny changes. A little less food. A little less play. A quieter day.
+
+3
+00:00:17,228 --> 00:00:30,548
+For first-time owners, those signals are easy to miss. A cat who stops eating dry food may not be picky. She may have a toothache. And by the time we notice, the problem has often grown.
+
+4
+00:00:31,748 --> 00:00:41,852
+Most advice online is generic. It asks, is this normal for a cat? PetPulse asks a better question. Is this normal for my cat?
+
+5
+00:00:43,052 --> 00:00:50,276
+It starts with a simple profile. Name, breed, age, weight, and medical history.
+
+6
+00:00:51,476 --> 00:01:02,324
+Then, once a day, a quick check-in. Food, water, stool, activity, coat and eyes, with photos and notes. It takes about a minute.
+
+7
+00:01:03,524 --> 00:01:11,948
+Over time, PetPulse learns your pet's personal baseline. How much Mochi usually eats, drinks, and plays.
+
+8
+00:01:13,148 --> 00:01:18,524
+Most days, the answer is reassuring. No meaningful change detected.
+
+9
+00:01:19,724 --> 00:01:35,756
+But when something shifts, PetPulse notices. Dry food, down forty percent. Activity, down thirty percent. It explains what changed, what it could mean, and what to do next. Keep monitoring, or see your vet.
+
+10
+00:01:36,956 --> 00:01:42,860
+Every check-in, every photo, and every report lives on one health timeline.
+
+11
+00:01:44,060 --> 00:01:53,972
+And with one tap, something feels wrong becomes a vet-ready summary. Clear changes, a clear timeline, and photos your veterinarian can use.
+
+12
+00:01:55,172 --> 00:02:13,724
+The need is real. Ninety-four million American households own a pet. About forty-nine million own a cat. Fifty-two percent of owners have skipped or declined needed veterinary care. And ninety-four percent of veterinarians say cost limits the care they can recommend.
+
+13
+00:02:14,924 --> 00:02:32,492
+Other tools look at one symptom, one photo, one moment. PetPulse is designed to be personalized, longitudinal, multimodal, and actionable. With no new hardware. Just your phone, and the signals your pet already gives you every day.
+
+14
+00:02:33,692 --> 00:02:40,196
+PetPulse doesn't replace your veterinarian. It helps you reach them sooner, with better information.
+
+15
+00:02:41,396 --> 00:02:50,588
+We begin with first-time cat owners. Then all cat owners, then dogs. And in time, partners like clinics and insurers.
+
+16
+00:02:51,788 --> 00:02:59,708
+PetPulse. Small changes make a big difference. Because every pet deserves a longer, healthier life.

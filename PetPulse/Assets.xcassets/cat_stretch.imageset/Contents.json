@@ -1,0 +1,6 @@
+{
+  "images" : [
+    { "filename" : "cat_stretch.jpg", "idiom" : "universal" }
+  ],
+  "info" : { "author" : "xcode", "version" : 1 }
+}
