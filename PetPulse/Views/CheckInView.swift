@@ -29,10 +29,15 @@ struct CheckInView: View {
     @State private var demoPhotos: [String] = []
     @State private var pickerItems: [PhotosPickerItem] = []
     @State private var loaded = false
+    @State private var showVoice = false
 
     private static let moods = ["Happy", "Calm", "Withdrawn", "Restless"]
     private var today: Date { Calendar.current.startOfDay(for: .now) }
     private var existing: DailyCheckIn? { checkIns.first { $0.day == today } }
+    /// The pet's usual values from the days before today.
+    private var usual: [Metric: Double] {
+        BaselineEngine.baseline(checkIns.filter { $0.day != today }.suffix(BaselineEngine.windowDays).map(\.sample)).usual
+    }
 
     var body: some View {
         ScrollView {
@@ -88,7 +93,17 @@ struct CheckInView: View {
             .padding(.bottom, 24)
         }
         .scrollDismissesKeyboard(.interactively)
-        .screen("Daily Check-in")
+        .screen("Daily Check-in") {
+            Button { showVoice = true } label: {
+                Image(systemName: "mic.fill")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(PP.teal)
+                    .frame(width: 44, height: 44, alignment: .trailing)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Voice check-in")
+        }
+        .fullScreenCover(isPresented: $showVoice) { VoiceCheckInView(pet: pet, onUse: apply) }
         .tint(PP.teal)
         .onAppear(perform: load)
         .onChange(of: pickerItems) { _, items in
@@ -192,12 +207,30 @@ struct CheckInView: View {
             photos = existing.photoData
             demoPhotos = existing.demoPhotoNames
         } else {
-            let usual = BaselineEngine.baseline(checkIns.suffix(BaselineEngine.windowDays).map(\.sample)).usual
+            let usual = self.usual
             dryFood = ((usual[.dryFood] ?? dryFood) / 5).rounded() * 5
             wetFood = ((usual[.wetFood] ?? wetFood) / 5).rounded() * 5
             water = ((usual[.water] ?? water) / 10).rounded() * 10
             stoolCount = Int((usual[.stool] ?? Double(stoolCount)).rounded())
             activity = (usual[.activity] ?? activity).rounded()
+        }
+    }
+
+    /// Fills the form from a voice check-in. Anything not mentioned keeps its current value.
+    private func apply(_ voice: VoiceCheckIn) {
+        let usual = self.usual
+        func value(_ metric: Metric, _ current: Double, step: Double, in range: ClosedRange<Double>) -> Double {
+            voice.readings[metric]?.value(usual: usual[metric] ?? current, step: step, in: range) ?? current
+        }
+        dryFood = value(.dryFood, dryFood, step: 5, in: 0...150)
+        wetFood = value(.wetFood, wetFood, step: 5, in: 0...200)
+        water = value(.water, water, step: 10, in: 0...300)
+        stoolCount = Int(value(.stool, Double(stoolCount), step: 1, in: 0...8))
+        activity = value(.activity, activity, step: 1, in: 0...10)
+        stoolNormal = voice.stoolNormal ?? stoolNormal
+        urinationNormal = voice.urinationNormal ?? urinationNormal
+        if !voice.transcript.isEmpty, !notes.contains(voice.transcript) {
+            notes = notes.isEmpty ? voice.transcript : notes + "\n" + voice.transcript
         }
     }
 
