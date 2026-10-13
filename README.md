@@ -12,7 +12,7 @@
   <img alt="UI" src="https://img.shields.io/badge/UI-SwiftUI-2F7FD3">
   <img alt="Storage" src="https://img.shields.io/badge/storage-SwiftData%20(on--device)-34B77C">
   <img alt="Dependencies" src="https://img.shields.io/badge/third--party%20packages-1%20(WhisperKit)-70808F">
-  <img alt="Build" src="https://img.shields.io/badge/build-not%20yet%20compiled-F5A623">
+  <img alt="Build" src="https://img.shields.io/badge/build-passing-34B77C">
   <img alt="License" src="https://img.shields.io/badge/license-none%20yet-lightgrey">
 </p>
 
@@ -47,10 +47,10 @@ PetPulse supports monitoring and triage. It does not diagnose.
 
 | Area | State | Notes |
 |---|---|---|
-| 8 screens from the mockup (splash, profile, home, check-in, baseline, changes, timeline, vet summary) | Source-complete | Written on Windows; **not yet compiled or run** |
-| Voice check-in (on-device Whisper transcription, transcript → form fields) | Source-complete | Not yet compiled or run; similarity threshold is untuned |
+| 8 screens from the mockup (splash, profile, home, check-in, baseline, changes, timeline, vet summary) | Source-complete | Compiles with the iOS 27.1 SDK |
+| Voice check-in (on-device Whisper transcription, transcript → form fields) | Source-complete | Compiles and parser tests pass; not yet tried on a device; similarity threshold is untuned |
 | More screen with demo controls | Source-complete | Not in the mockup; reached from the More tab |
-| Baseline and change-detection engine | Source-complete | Pure Swift, covered by unit tests (not yet run) |
+| Baseline and change-detection engine | Source-complete | Pure Swift, covered by unit tests (passing) |
 | Vet summary PDF export and share sheet | Source-complete | Single-page vector PDF |
 | On-device persistence | Source-complete | SwiftData, no account |
 | Multimodal AI (photo, video and audio analysis) | Roadmap | Detection today is statistical and rule-based |
@@ -162,10 +162,10 @@ Tunable constants:
 ## Testing
 
 ```bash
-xcodebuild test -project PetPulse.xcodeproj -scheme PetPulse -destination 'platform=iOS Simulator,name=iPhone 16'
+xcodebuild test -project PetPulse.xcodeproj -scheme PetPulse -destination 'platform=iOS Simulator,name=iPhone 18 Pro'
 ```
 
-Or press ⌘U in Xcode. The engine tests cover the median, minimum-history rule, threshold, run length, increases, timeline labels and the demo narrative. The voice parser tests cover the mockup sentence, explicit amounts, negation, abnormal stool and the embedding fallback (with a stand-in embedding). **None have been run yet**: the code was written on a machine without a Swift toolchain.
+Or press ⌘U in Xcode. The engine tests cover the median, minimum-history rule, threshold, run length, increases, timeline labels and the demo narrative. The voice parser tests cover the mockup sentence, explicit amounts, negation, abnormal stool and the embedding fallback (with a stand-in embedding). All 20 tests pass on the iOS 27.1 simulator.
 
 ## Privacy and safety
 
