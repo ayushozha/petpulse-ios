@@ -98,7 +98,12 @@ Metrics tracked: dry food, wet food, water, stool frequency, activity, and optio
 
 ## Voice check-in
 
-Tap the microphone on **Daily Check-in**, describe the day in your own words, then **Use This** to fill the form. You still review and save the check-in yourself.
+Start a voice check-in from any of these, describe the day in your own words, then **Use This** to fill the form. You still review and save the check-in yourself.
+
+- **Speak Your Check-in** on Home.
+- The **Describe … day out loud** card at the top of Daily Check-in.
+- **Siri**: "Check in with PetPulse", "Log my pet's day in PetPulse", "Tell PetPulse about my pet's day" or "Start a voice check-in in PetPulse". The same action appears in Spotlight and the Shortcuts app, and can be assigned to the Action Button.
+- **Control Center or Lock Screen** (iOS 18 and later): add the **Voice Check-in** control. [`VoiceCheckInIntent`](Shared/VoiceCheckInIntent.swift) opens the app and [`VoiceCheckInRequest`](Shared/VoiceCheckInRequest.swift) hands the request to the UI.
 
 - **Speech to text:** OpenAI's open-source Whisper model, run on the phone through WhisperKit (Core ML). [`SpeechTranscriber.swift`](PetPulse/Voice/SpeechTranscriber.swift) re-transcribes the clip about once a second while you speak, then once more when you stop. Clips are capped at 30 seconds.
 - **Understanding:** [`VoiceParser.swift`](PetPulse/Engine/VoiceParser.swift) splits the transcript into clauses and reads each one for a topic (food, water, stool and urination, activity) and a level. Clear wording is matched directly. Phrasing with no known keyword or cue is matched by meaning, using Apple's on-device sentence embedding (`NLEmbedding`) against example phrases.
@@ -115,11 +120,14 @@ The first use downloads the Whisper model from Hugging Face, which needs a conne
 | `PetPulse/Models/` | SwiftData models: `Pet`, `DailyCheckIn`, `TimelineEvent` |
 | `PetPulse/Engine/` | Baseline maths, narrative wording, voice transcript parsing, demo data |
 | `PetPulse/Voice/` | Whisper transcription and sentence embedding |
+| `PetPulseWidgets/` | Widget extension with the Voice Check-in control (iOS 18+) |
+| `Shared/` | Code built into both the app and the widget extension: the Voice Check-in App Intent |
 | `PetPulse/Views/` | One file per screen |
 | `PetPulse/Assets.xcassets/` | App icon, hero art, cat photos |
 | `PetPulseTests/` | Unit tests for the engine |
 | `PetPulse.xcodeproj/` | Xcode project (synchronized folders: new files are picked up automatically) |
 | `Config/Info.plist` | Extra Info.plist keys merged into the generated one (the Whisper model setting) |
+| `Config/PetPulseWidgets-Info.plist` | Widget extension point for `PetPulseWidgets` |
 | `project.yml` | XcodeGen fallback |
 
 ## Architecture
