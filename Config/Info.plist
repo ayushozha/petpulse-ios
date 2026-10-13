@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Whisper model variant. Set the WHISPER_MODEL build setting; empty lets WhisperKit pick for the device. -->
+	<key>WhisperModel</key>
+	<string>$(WHISPER_MODEL)</string>
+</dict>
+</plist>
