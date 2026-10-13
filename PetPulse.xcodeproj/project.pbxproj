@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA0000000000000000000062 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA0000000000000000000061 /* WhisperKit */; };
+		AA0000000000000000000073 /* PetPulseWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000070 /* PetPulseWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -18,11 +19,33 @@
 			remoteGlobalIDString = AA0000000000000000000020;
 			remoteInfo = PetPulse;
 		};
+		AA0000000000000000000075 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA0000000000000000000010 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA0000000000000000000080;
+			remoteInfo = PetPulseWidgets;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA0000000000000000000074 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AA0000000000000000000073 /* PetPulseWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AA0000000000000000000002 /* PetPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0000000000000000000003 /* PetPulseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetPulseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000070 /* PetPulseWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PetPulseWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -34,6 +57,16 @@
 		AA0000000000000000000005 /* PetPulseTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PetPulseTests;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000071 /* PetPulseWidgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PetPulseWidgets;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000072 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -54,6 +87,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000000000000000000083 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,6 +102,8 @@
 			children = (
 				AA0000000000000000000004 /* PetPulse */,
 				AA0000000000000000000005 /* PetPulseTests */,
+				AA0000000000000000000071 /* PetPulseWidgets */,
+				AA0000000000000000000072 /* Shared */,
 				AA0000000000000000000012 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +113,7 @@
 			children = (
 				AA0000000000000000000002 /* PetPulse.app */,
 				AA0000000000000000000003 /* PetPulseTests.xctest */,
+				AA0000000000000000000070 /* PetPulseWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,13 +128,16 @@
 				AA0000000000000000000022 /* Sources */,
 				AA0000000000000000000021 /* Frameworks */,
 				AA0000000000000000000023 /* Resources */,
+				AA0000000000000000000074 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AA0000000000000000000076 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				AA0000000000000000000004 /* PetPulse */,
+				AA0000000000000000000072 /* Shared */,
 			);
 			name = PetPulse;
 			packageProductDependencies = (
@@ -124,6 +170,29 @@
 			productReference = AA0000000000000000000003 /* PetPulseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		AA0000000000000000000080 /* PetPulseWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000081 /* Build configuration list for PBXNativeTarget "PetPulseWidgets" */;
+			buildPhases = (
+				AA0000000000000000000082 /* Sources */,
+				AA0000000000000000000083 /* Frameworks */,
+				AA0000000000000000000084 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AA0000000000000000000071 /* PetPulseWidgets */,
+				AA0000000000000000000072 /* Shared */,
+			);
+			name = PetPulseWidgets;
+			packageProductDependencies = (
+			);
+			productName = PetPulseWidgets;
+			productReference = AA0000000000000000000070 /* PetPulseWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -140,6 +209,9 @@
 					AA0000000000000000000030 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = AA0000000000000000000020;
+					};
+					AA0000000000000000000080 = {
+						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
@@ -162,6 +234,7 @@
 			targets = (
 				AA0000000000000000000020 /* PetPulse */,
 				AA0000000000000000000030 /* PetPulseTests */,
+				AA0000000000000000000080 /* PetPulseWidgets */,
 			);
 		};
 /* End PBXProject section */
@@ -175,6 +248,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AA0000000000000000000033 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000084 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -198,6 +278,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000000000000000000082 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -205,6 +292,11 @@
 			isa = PBXTargetDependency;
 			target = AA0000000000000000000020 /* PetPulse */;
 			targetProxy = AA0000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		AA0000000000000000000076 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA0000000000000000000080 /* PetPulseWidgets */;
+			targetProxy = AA0000000000000000000075 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -356,6 +448,56 @@
 			};
 			name = Release;
 		};
+		AA0000000000000000000085 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/PetPulseWidgets-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PetPulse;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petpulse.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000086 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Config/PetPulseWidgets-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PetPulse;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petpulse.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -382,6 +524,15 @@
 			buildConfigurations = (
 				AA0000000000000000000050 /* Debug */,
 				AA0000000000000000000051 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000081 /* Build configuration list for PBXNativeTarget "PetPulseWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000085 /* Debug */,
+				AA0000000000000000000086 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -14,7 +14,7 @@ struct PetPulseApp: App {
 }
 
 enum Route: Hashable {
-    case checkIn, baseline, changes, timeline, vetSummary, more, profile
+    case checkIn, voiceCheckIn, baseline, changes, timeline, vetSummary, more, profile
 }
 
 @Observable
@@ -45,6 +45,7 @@ struct MainView: View {
                 .navigationDestination(for: Route.self) { route in
                     switch route {
                     case .checkIn: CheckInView(pet: pet)
+                    case .voiceCheckIn: CheckInView(pet: pet, startsWithVoice: true)
                     case .baseline: BaselineView(pet: pet)
                     case .changes: ChangesView(pet: pet)
                     case .timeline: HealthTimelineView(pet: pet)
@@ -55,5 +56,21 @@ struct MainView: View {
                 }
         }
         .environment(router)
+        .onAppear(perform: openRequestedVoiceCheckIn)
+        .onChange(of: VoiceCheckInRequest.shared.isPending) { openRequestedVoiceCheckIn() }
+    }
+
+    /// Opens the voice check-in when Siri, Shortcuts or the Control Center control asked for it.
+    private func openRequestedVoiceCheckIn() {
+        let request = VoiceCheckInRequest.shared
+        guard request.isPending else { return }
+        switch router.path.last {
+        case .checkIn, .voiceCheckIn:
+            // A check-in already on screen opens the voice check-in itself, keeping anything entered so far.
+            break
+        default:
+            request.isPending = false
+            router.path = [.voiceCheckIn]
+        }
     }
 }

@@ -23,17 +23,7 @@ struct VoiceCheckInView: View {
                     PrimaryButton("Use This", leadingImage: "checkmark", action: use)
                         .disabled(detected.transcript.isEmpty)
                         .opacity(detected.transcript.isEmpty ? 0.5 : 1)
-                    Button { transcriber.start() } label: {
-                        Label("Try Again", systemImage: "arrow.counterclockwise")
-                            .font(.pp(17, .semibold))
-                            .foregroundStyle(PP.teal)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 54)
-                            .background(.white, in: Capsule())
-                            .overlay(Capsule().stroke(PP.teal.opacity(0.5), lineWidth: 1.5))
-                            .contentShape(Capsule())
-                    }
-                    .buttonStyle(.plain)
+                    SecondaryButton("Try Again", leadingImage: "arrow.counterclockwise") { transcriber.start() }
                 }
                 .padding(.top, 4)
             }

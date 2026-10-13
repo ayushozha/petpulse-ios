@@ -190,6 +190,36 @@ struct PrimaryButtonLabel: View {
     }
 }
 
+/// White outlined capsule for an alternative to the `PrimaryButton` beside it.
+struct SecondaryButton: View {
+    var title: String
+    var leadingImage: String?
+    var action: () -> Void
+
+    init(_ title: String, leadingImage: String? = nil, action: @escaping () -> Void) {
+        self.title = title
+        self.leadingImage = leadingImage
+        self.action = action
+    }
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                if let leadingImage { Image(systemName: leadingImage) }
+                Text(title)
+            }
+            .font(.pp(17, .semibold))
+            .foregroundStyle(PP.teal)
+            .frame(maxWidth: .infinity)
+            .frame(height: 54)
+            .background(.white, in: Capsule())
+            .overlay(Capsule().stroke(PP.teal.opacity(0.5), lineWidth: 1.5))
+            .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+}
+
 extension View {
     /// White rounded card with a hairline border and soft shadow.
     func card(radius: CGFloat = 16, padding: CGFloat = 14) -> some View {

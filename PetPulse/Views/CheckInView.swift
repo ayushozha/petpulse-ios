@@ -4,6 +4,8 @@ import SwiftUI
 
 struct CheckInView: View {
     var pet: Pet
+    /// Opens the voice check-in as soon as the screen appears, for the Home button, Siri and the control.
+    var startsWithVoice = false
 
     @Environment(\.modelContext) private var context
     @Environment(Router.self) private var router
@@ -51,6 +53,8 @@ struct CheckInView: View {
                     .background(.white, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(PP.stroke, lineWidth: 1))
 
+                voiceCard
+
                 row(.food, .metric(.dryFood), "Food & Feeding", "How much did \(pet.name) eat?") {
                     SliderField(label: "Dry food", value: $dryFood, range: 0...150, step: 5, unit: "g")
                     SliderField(label: "Wet food", value: $wetFood, range: 0...200, step: 5, unit: "g")
@@ -93,19 +97,11 @@ struct CheckInView: View {
             .padding(.bottom, 24)
         }
         .scrollDismissesKeyboard(.interactively)
-        .screen("Daily Check-in") {
-            Button { showVoice = true } label: {
-                Image(systemName: "mic.fill")
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(PP.teal)
-                    .frame(width: 44, height: 44, alignment: .trailing)
-                    .contentShape(Rectangle())
-            }
-            .accessibilityLabel("Voice check-in")
-        }
+        .screen("Daily Check-in")
         .fullScreenCover(isPresented: $showVoice) { VoiceCheckInView(pet: pet, onUse: apply) }
         .tint(PP.teal)
         .onAppear(perform: load)
+        .onChange(of: VoiceCheckInRequest.shared.isPending) { openRequestedVoiceCheckIn() }
         .onChange(of: pickerItems) { _, items in
             guard !items.isEmpty else { return }
             Task {
@@ -120,6 +116,33 @@ struct CheckInView: View {
     }
 
     // MARK: Pieces
+
+    private var voiceCard: some View {
+        Button { showVoice = true } label: {
+            HStack(spacing: 12) {
+                Image(systemName: "mic.fill")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 42, height: 42)
+                    .background(PP.buttonGradient, in: Circle())
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Describe \(pet.name)'s day out loud").font(.pp(15, .semibold)).foregroundStyle(PP.navy)
+                    Text("Speak naturally and PetPulse fills in the form for you.").font(.pp(12)).foregroundStyle(PP.subtext)
+                }
+                .multilineTextAlignment(.leading)
+                Spacer(minLength: 4)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(PP.teal)
+            }
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(PP.mint, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).stroke(PP.tealLight.opacity(0.6), lineWidth: 1))
+            .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .buttonStyle(.plain)
+    }
 
     private func row<Content: View>(_ section: Section, _ kind: IconKind, _ title: String, _ subtitle: String,
                                     symbol: String? = nil, @ViewBuilder content: () -> Content) -> some View {
@@ -214,6 +237,15 @@ struct CheckInView: View {
             stoolCount = Int((usual[.stool] ?? Double(stoolCount)).rounded())
             activity = (usual[.activity] ?? activity).rounded()
         }
+        showVoice = startsWithVoice
+    }
+
+    /// Siri, Shortcuts or the Control Center control asked for a voice check-in while this screen was open.
+    private func openRequestedVoiceCheckIn() {
+        let request = VoiceCheckInRequest.shared
+        guard request.isPending else { return }
+        request.isPending = false
+        showVoice = true
     }
 
     /// Fills the form from a voice check-in. Anything not mentioned keeps its current value.

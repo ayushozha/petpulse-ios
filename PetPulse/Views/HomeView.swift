@@ -40,8 +40,13 @@ struct HomeView: View {
                     todayItem("Activity", kind: .metric(.activity))
                 }
                 .padding(.horizontal, 4)
-                PrimaryButton(doneToday ? "Edit Today's Check-in" : "Start Daily Check-in", systemImage: "arrow.right") {
-                    router.path.append(.checkIn)
+                VStack(spacing: 10) {
+                    PrimaryButton(doneToday ? "Edit Today's Check-in" : "Start Daily Check-in", systemImage: "arrow.right") {
+                        router.path.append(.checkIn)
+                    }
+                    SecondaryButton("Speak Your Check-in", leadingImage: "mic.fill") {
+                        router.path.append(.voiceCheckIn)
+                    }
                 }
             }
             .padding(.horizontal, 22)

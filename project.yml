@@ -18,10 +18,12 @@ targets:
   PetPulse:
     type: application
     platform: iOS
-    sources: [PetPulse]
+    sources: [PetPulse, Shared]
     dependencies:
       - package: WhisperKit
         product: WhisperKit
+      - target: PetPulseWidgets
+        embed: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.petpulse.app
@@ -37,6 +39,18 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UIUserInterfaceStyle: Light
+  PetPulseWidgets:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "18.0"
+    sources: [PetPulseWidgets, Shared]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.petpulse.app.widgets
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: Config/PetPulseWidgets-Info.plist
+        INFOPLIST_KEY_CFBundleDisplayName: PetPulse
   PetPulseTests:
     type: bundle.unit-test
     platform: iOS
